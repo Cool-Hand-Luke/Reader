@@ -368,9 +368,11 @@
 	doubleTapOne.numberOfTouchesRequired = 1; doubleTapOne.numberOfTapsRequired = 2; doubleTapOne.delegate = self;
 	[self.view addGestureRecognizer:doubleTapOne];
 
+#if (READER_SINGLETAPZOOM == FALSE) // Option
 	UITapGestureRecognizer *doubleTapTwo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
 	doubleTapTwo.numberOfTouchesRequired = 2; doubleTapTwo.numberOfTapsRequired = 2; doubleTapTwo.delegate = self;
 	[self.view addGestureRecognizer:doubleTapTwo];
+#endif
 
 	[singleTapOne requireGestureRecognizerToFail:doubleTapOne]; // Single tap requires double tap to fail
 
@@ -687,6 +689,9 @@
 
 			ReaderContentView *targetView = [contentViews objectForKey:key];
 
+#if (READER_SINGLETAPZOOM == TRUE) // Option
+			[targetView zoomToggle];
+#else
 			switch (recognizer.numberOfTouchesRequired) // Touches count
 			{
 				case 1: // One finger double tap: zoom ++
@@ -699,7 +704,7 @@
 					[targetView zoomDecrement]; break;
 				}
 			}
-
+#endif
 			return;
 		}
 

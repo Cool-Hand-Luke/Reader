@@ -26,6 +26,12 @@
 #import "ReaderDocumentOutline.h"
 #import "CGPDFDocument.h"
 
+@interface ReaderDocumentOutline()
+
+void logDictionaryEntry(const char *key, CGPDFObjectRef object, void *info);
+
+@end
+
 @implementation ReaderDocumentOutline
 
 #pragma mark Build option flags

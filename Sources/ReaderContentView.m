@@ -272,6 +272,18 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	}
 }
 
+- (void)zoomToggle
+{
+	if (self.zoomScale > self.minimumZoomScale)
+	{
+        [self setZoomScale:self.minimumZoomScale animated:YES];
+	}
+    else
+    {
+        [self setZoomScale:self.maximumZoomScale animated:YES];
+    }
+}
+
 #pragma mark UIScrollViewDelegate methods
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
